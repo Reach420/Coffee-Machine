@@ -34,23 +34,32 @@ resources = {
 }
 
 def checkResources(coffee):
-    efficient = True
+    efficient = None
     for ingredient in MENU[coffee]['ingredients'].keys():
-        if resources[ingredient] < MENU[coffee]['ingredients'][ingredient]:
+        if resources[ingredient] < MENU[coffee]['ingredients'][ingredient]: # Compares resources with the required ingredients
             efficient = False
             return efficient, ingredient
     return efficient, ingredient
 
 # ----- Main Loop -----
 off = False
-efficient = True
 while not off:
     coffee = input("​What would you like? (espresso/latte/cappuccino): ")
 
+    efficient = None
     if coffee == "espresso":
         efficient, ingredient = checkResources('espresso')
 
-    if not efficient:
+    if efficient:
+        print("Please insert the coins")
+        quarters = input("How many quarters? ")
+        dimes = input("How many dimes? ")
+        nickles = input("How many nickles? ")
+        pennies = input("How many pennies? ")
+        # # Deduct resources values
+        # for ingredient in MENU[coffee]['ingredients'].keys():
+        #     resources[ingredient] -= MENU[coffee]['ingredients'][ingredient]
+    elif not efficient:
         print(f"Sorry, There is not enough {ingredient}")
 
 # ----- All time commands ------

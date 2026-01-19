@@ -18,9 +18,9 @@ MENU = {
     },
     "cappuccino": {
         "ingredients": {
-            "water": 250,
-            "milk": 100,
-            "coffee": 24,
+            "water": 300,
+            "milk": 200,
+            "coffee": 100,
         },
         "cost": 3.0,
     }
@@ -62,19 +62,24 @@ def processOrder(resources,coffee):
     if not efficient:
         print(f"Sorry, There is not enough {ingredient}")
         return
-
+    userMoney = 0
     print("Please insert the coins")
     quarters = float(getInput("How many quarters? ")) * 0.25
     dimes = float(getInput("How many dimes? ")) * 0.10
     nickles = float(getInput("How many nickles? ")) * 0.05 
     pennies = float(getInput("How many pennies? ")) * 0.01
-    resources["money"] = quarters + dimes + nickles + pennies
-    if resources["money"] < MENU[coffee]["cost"]:
+    userMoney = quarters + dimes + nickles + pennies
+    if userMoney < MENU[coffee]["cost"]:
         print("Sorry that's not enough money. Money refunded")
+    else:
+        print(f"Here is ${round(userMoney - MENU[coffee]["cost"], 2)} dollars in change.")
+        # Deduct resources values
+        for ingredient in MENU[coffee]['ingredients'].keys():
+            resources[ingredient] -= MENU[coffee]['ingredients'][ingredient]
+        resources['money'] += MENU[coffee]["cost"] # add profit to machine report
+
+        print("Here is your latte. Enjoy!")
     
-    # Deduct resources values
-    for ingredient in MENU[coffee]['ingredients'].keys():
-        resources[ingredient] -= MENU[coffee]['ingredients'][ingredient]
 
 
 # ----- Main Loop -----
@@ -83,3 +88,7 @@ while True:
     efficient = True
     if coffee == "espresso":
         processOrder(resources,"espresso")
+    if coffee == "latte":
+        processOrder(resources,"latte")
+    if coffee == "cappuccino":
+        processOrder(resources,"cappuccino")

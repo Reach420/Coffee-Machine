@@ -29,7 +29,7 @@ MENU = {
 resources = {
     "water": 300,
     "milk": 200,
-    "coffee": 100,
+    "coffee": 10,
     "money": 0
 }
 def getInput(prompt):
@@ -53,14 +53,14 @@ def checkResources(coffee):
     for ingredient in MENU[coffee]['ingredients'].keys():
         if resources[ingredient] < MENU[coffee]['ingredients'][ingredient]: # Compares resources with the required ingredients
             efficient = False
-            return efficient, ingredient
-    return efficient, ingredient
+            print(f"Sorry, There is not enough {ingredient}.")
+            return efficient
+    return efficient
 
 def processOrder(resources,coffee):
-    efficient, ingredient = checkResources('espresso')
+    efficient = checkResources('espresso')
 
     if not efficient:
-        print(f"Sorry, There is not enough {ingredient}")
         return
     userMoney = 0
     print("Please insert the coins")

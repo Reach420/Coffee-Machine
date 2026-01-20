@@ -44,6 +44,7 @@ def getInput(prompt):
             print(f"Milk: {resources['milk']}ml")
             print(f"Coffee: {resources['coffee']}g")
             print(f"Money: {resources['money']}$")
+            continue
         else:
             command = False
     return Finput
@@ -58,7 +59,7 @@ def checkResources(coffee):
     return efficient
 
 def processOrder(resources,coffee):
-    efficient = checkResources('espresso')
+    efficient = checkResources(coffee)
     if not efficient:
         return
     userMoney = 0
@@ -77,7 +78,7 @@ def processOrder(resources,coffee):
             resources[ingredient] -= MENU[coffee]['ingredients'][ingredient]
         resources['money'] += MENU[coffee]["cost"] # add profit to machine report
 
-        print("Here is your latte. Enjoy!")
+        print(f"Here is your {coffee}. Enjoy!")
     
 
 

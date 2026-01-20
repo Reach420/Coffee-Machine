@@ -32,6 +32,7 @@ resources = {
     "coffee": 10,
     "money": 0
 }
+
 def getInput(prompt):
     command = True
     while command:
@@ -47,7 +48,6 @@ def getInput(prompt):
             command = False
     return Finput
 
-
 def checkResources(coffee):
     efficient = True
     for ingredient in MENU[coffee]['ingredients'].keys():
@@ -59,7 +59,6 @@ def checkResources(coffee):
 
 def processOrder(resources,coffee):
     efficient = checkResources('espresso')
-
     if not efficient:
         return
     userMoney = 0

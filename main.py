@@ -34,8 +34,7 @@ resources = {
 }
 
 def getInput(prompt):
-    command = True
-    while command:
+    while True:
         Finput = input(prompt)
         if Finput == "off":
             sys.exit()
@@ -45,9 +44,8 @@ def getInput(prompt):
             print(f"Coffee: {resources['coffee']}g")
             print(f"Money: {resources['money']}$")
             continue
-        else:
-            command = False
-    return Finput
+        else:  
+            return Finput
 
 def checkResources(coffee):
     efficient = True
@@ -58,7 +56,7 @@ def checkResources(coffee):
             return efficient
     return efficient
 
-def processOrder(resources,coffee):
+def processOrder(coffee):
     efficient = checkResources(coffee)
     if not efficient:
         return
@@ -87,8 +85,8 @@ while True:
     coffee = getInput("​What would you like? (espresso/latte/cappuccino): ")
     efficient = True
     if coffee == "espresso":
-        processOrder(resources,"espresso")
+        processOrder("espresso")
     if coffee == "latte":
-        processOrder(resources,"latte")
+        processOrder("latte")
     if coffee == "cappuccino":
-        processOrder(resources,"cappuccino")
+        processOrder("cappuccino")
